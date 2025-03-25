@@ -546,22 +546,6 @@
     margin-bottom: 5px;
 }
 
-        .body-report {
-            background-color: #f8f9fa;
-        }
-        .chart-container {
-            width: 48%;
-            padding: 20px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-        .chart-container:hover {
-            transform: translateY(-5px);
-        }
-
-
         .card img {
             transition: transform 0.3s ease-in-out;
             cursor: pointer;
@@ -585,7 +569,7 @@
             border-radius: 10px;
             background: #f8f9fa;
         }
-            @media (max-width: 768px) {
+     @media (max-width: 768px) {
     .table {
         font-size: 12px; /* Thu nhỏ chữ */
     }

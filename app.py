@@ -88,7 +88,7 @@ def login():
 
             if user and check_password_hash(user['mat_khau'], mat_khau):
                 # Lấy thông tin tên người dùng từ bảng ThongTinNguoiDung
-                cur.execute("SELECT ten_nguoi_dung FROM ThongTinNguoiDung WHERE id = %s", (user['id'],))
+                cur.execute("SELECT ten_nguoi_dung, email FROM ThongTinNguoiDung WHERE id = %s", (user['id'],))
                 user_info = cur.fetchone()
 
                 session['loggedin'] = True
@@ -96,7 +96,7 @@ def login():
                 session['ten_tai_khoan'] = user['ten_tai_khoan']
                 session['ma_quyen'] = user['ma_quyen']
                 session['ten_nguoi_dung'] = user_info['ten_nguoi_dung'] if user_info else user['ten_tai_khoan']
-
+                session['email'] = user_info['email']
                 flash(f'Chào mừng {session["ten_nguoi_dung"]}!', 'success')
 
                 cur.close()

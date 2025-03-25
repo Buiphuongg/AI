@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block head %}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        .body-report {
+<style>
+    .body-report {
             background-color: #f8f9fa;
         }
         .chart-container {
@@ -16,9 +16,10 @@
         .chart-container:hover {
             transform: translateY(-5px);
         }
-    </style>
+</style>
 {% endblock %}
 {% block body %}
+
 <div class="container mt-5 pt-5">
     <center><h1 class="mt-5 pt-5">Thống kê - Báo cáo</h1></center>
 
@@ -28,26 +29,20 @@
         </div>
 
         <div class="col-6">
-            <table class="table">
+            <table class="table w-100">
                 <tr>
                     <th>Khay Hàng</th>
-                    <th>Hình ảnh</th>
                     <th>Số Lượng Tổng</th>
                     <th>Tỷ Lệ Hư Hỏng (%)</th>
                 </tr>
                 {% for row in thongke %}
                 <tr>
-                    <td>{{ row.4 }}</td>
-                    <td><img style="width: 50px; border-radius: 5px;"></td>
                     <td>{{ row.3 }}</td>
-                    <td>{{ row.2 }}%</td>
+                    <td>{{ row.2 }}</td>
+                    <td>{{ ((row.1 / row.2)*100) | round(2) }} %</td>
                 </tr>
                 {% endfor %}
             </table>
-            <div class="container text-center mt-4">
-                <a href="{{ url_for('thongke.xuatbaocao') }}" class="btn btn-primary p-3 text-white">Xuất Báo Cáo</a>
-            </div>
-
         </div>
     </div>
 

@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
 
-        <meta content="width=device-width, initial-scale=2.0" name="viewport">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
 
@@ -28,10 +28,9 @@
         <!-- Template Stylesheet -->
         <link href="../static/css/style.css" rel="stylesheet">
         <style>
-                        .footer {
+        .footer {
             font-size: 1rem;  /* Mặc định trên PC */
         }
-
         @media (max-width: 768px) {  /* Tablet */
             .footer {
                 font-size: 1rem;
@@ -43,6 +42,10 @@
                 font-size: 0.8rem;
             }
         }
+            .navbar .dropdown-toggle::after {
+    display: none !important;
+}
+
         </style>
         {% block head %}{% endblock %}
     </head>
@@ -61,7 +64,9 @@
                 <div class="d-flex justify-content-between">
                     <div class="top-info ps-2">
                         <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">Siêu Thị Aeon Mall, Hải Phòng</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
+                        {% if session.get('loggedin') %}
+                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">{{ session['email'] }}</a></small>
+                        {% endif %}
                     </div>
                     <div class="top-link pe-2">
                         {% if session.get('loggedin') %}
@@ -102,15 +107,10 @@
                             </div>
 
                         </div>
-                        <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal">
-                                <i class="fas fa-search text-primary"></i>
-                            </button>
-
-                            <!-- Dropdown User -->
+                        <div class="d-flex m-3 me-0 justify-content-end">
                             <div class="dropdown">
-                                <a href="#" class="my-auto dropdown-toggle user-icon" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user fa-2x "></i>
+                                <a href="#" class="my-auto dropdown-toggle " id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user fa-2x me-2"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                                     {% if session.get('loggedin') %}
@@ -120,7 +120,6 @@
                                     {% else %}
                                         <li><a class="dropdown-item text-primary" href="{{ url_for('login') }}">Đăng nhập</a></li>
                                     {% endif %}
-
                                 </ul>
                             </div>
                         </div>
@@ -129,28 +128,9 @@
             </div>
         </div>
         <!-- Navbar End -->
-
-        <!-- Modal Search Start -->
-        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content rounded-0">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body d-flex align-items-center">
-                        <div class="input-group w-75 mx-auto d-flex">
-                            <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                            <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Search End -->
         {% block body %}{% endblock %}
 <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
+        <div class="container-fluid bg-dark text-white-50 footer">
             <div class="container py-5">
                 <div class="pb-4 mb-4" style="border-bottom: 1px solid rgba(226, 175, 24, 0.5) ;">
                     <div class="row g-4">

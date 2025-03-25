@@ -72,14 +72,14 @@ def add_account():
         flash('Quyền không hợp lệ!', 'danger')
         return redirect(url_for('taikhoan.list_accounts'))
 
-    # 📌 Kiểm tra xem email đã tồn tại chưa
+    # Kiểm tra xem email đã tồn tại chưa
     cursor.execute("SELECT * FROM TaiKhoan WHERE ten_tai_khoan = %s", (ten_tai_khoan,))
     if cursor.fetchone():
         flash('Email này đã được sử dụng làm tài khoản!', 'danger')
         return redirect(url_for('taikhoan.list_accounts'))
 
     try:
-        # 📌 Thêm thông tin người dùng
+        # Thêm thông tin người dùng
         cursor.execute("""
             INSERT INTO ThongTinNguoiDung (ten_nguoi_dung, dia_chi, email, so_dien_thoai, chuc_vu)
             VALUES (%s, %s, %s, %s, %s)
@@ -91,7 +91,7 @@ def add_account():
 
         hashed_password = generate_password_hash(mat_khau)
 
-        # 📌 Thêm tài khoản với email làm tên đăng nhập
+        # Thêm tài khoản với email làm tên đăng nhập
         cursor.execute("""
             INSERT INTO TaiKhoan (ten_tai_khoan, mat_khau, ma_quyen, id)
             VALUES (%s, %s, %s, %s)
@@ -107,7 +107,7 @@ def add_account():
     return redirect(url_for('taikhoan.list_accounts'))
 
 
-# 📌 Xóa tài khoản
+# Xóa tài khoản
 @taikhoan.route('/delete_account/<int:user_id>', methods=['GET'])
 def delete_account(user_id):
     conn = get_db_connection()
@@ -125,7 +125,7 @@ def delete_account(user_id):
     conn.close()
     return redirect(url_for('taikhoan.list_accounts'))
 
-# 📌 Cập nhật thông tin tài khoản người dùng
+# Cập nhật thông tin tài khoản người dùng
 @taikhoan.route('/update_account/<int:user_id>', methods=['POST'])
 def update_account(user_id):
     if request.method == 'POST':

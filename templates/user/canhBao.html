@@ -1,4 +1,4 @@
-{% extends "admin/base.html" %}
+{% extends "base.html" %}
 {% block head %}
     <title>Cảnh Báo</title>
 {% endblock %}
@@ -40,6 +40,7 @@
                                                 <th scope="col">Mức Độ Cảnh Báo</th>
                                                 <th scope="col">Nội Dung</th>
                                                 <th scope="col">Ngày Phát Hiện</th>
+                                                <th scope="col">Tài Khoản xử lý</th>
                                                 <th scope="col">Trạng Thái</th>
                                               </tr>
                                             </thead>
@@ -53,13 +54,16 @@
                                                         <p class="mb-0 mt-4">{{ row.1 }}</p>
                                                     </td>
                                                     <td>
-                                                        <p class="mb-0 mt-4">{{ row.2 }}</p>
+                                                        <p class="mb-0 mt-4">{{ row.3 }}</p>
                                                     </td>
                                                     <td>
                                                         <p class="mb-0 mt-4">{{ row.4 }}</p>
                                                     </td>
                                                     <td>
                                                         <p class="mb-0 mt-4">{{ row.5 }}</p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mb-0 mt-4">{{ row.7 }}</p>
                                                     </td>
                                                     <td>
                                                         <button class="status-btn btn {% if row[6] == 'Đã xử lý' %}btn-success{% else %}btn-warning{% endif %}"
